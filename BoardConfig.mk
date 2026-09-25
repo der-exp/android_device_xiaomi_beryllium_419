@@ -7,6 +7,13 @@
 # Inherit from sdm845-common
 include device/xiaomi/sdm845-common/BoardConfigCommon.mk
 
+# Partitions: system, system_ext and product as EROFS like vendor and odm. The retrofit super
+# (system 3 GiB + vendor 1 GiB + cust 832 MiB) is fixed in size and the DerpFest build with the
+# full GMS set overflowed it with these three on ext4; the 4.19 kernel has EROFS.
+BOARD_SYSTEMIMAGE_FILE_SYSTEM_TYPE := erofs
+BOARD_SYSTEM_EXTIMAGE_FILE_SYSTEM_TYPE := erofs
+BOARD_PRODUCTIMAGE_FILE_SYSTEM_TYPE := erofs
+
 DEVICE_PATH := device/xiaomi/beryllium
 
 # Assert
