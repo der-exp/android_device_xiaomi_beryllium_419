@@ -95,3 +95,9 @@ PRODUCT_SOONG_NAMESPACES += \
 # WiFi
 PRODUCT_PACKAGES += \
     TargetWifiOverlay
+
+# der-exp: steer routing engine and its glue (vendor/der, from the der-exp local manifest).
+# Without this line neither steer nor nft, the init services or the steerd SELinux domain end
+# up in the image. inherit-product rather than -if-exists: a tree without vendor/der is a
+# manifest error and the build must fail loudly instead of producing firmware without the engine.
+$(call inherit-product, vendor/der/config/der.mk)
